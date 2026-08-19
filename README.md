@@ -4,17 +4,6 @@ satomi. の作業規約を Claude Code のスキルとエージェントとし�
 
 **スキル 1 つに対しエージェント 1 つを対応させる。** スキルが規約の出典を担い、エージェントが手順と制約を担う。
 
-## 収録内容
-
-| スキル | エージェント | 担当範囲 |
-|---|---|---|
-| `/satomi-skills:core` | `@satomi-skills:core` | 作業全体の基準。規範・開発スタイル・知識の扱い・言語 |
-| `/satomi-skills:commit` | `@satomi-skills:commit` | コミットの粒度と規約。変更を type 単位に分割して積む |
-| `/satomi-skills:worktree` | `@satomi-skills:worktree` | 元の clone を汚さない worktree の配置と後始末 |
-| `/satomi-skills:document-design` | `@satomi-skills:document-design` | 文体・配色・書体・レイアウト・印刷 CSS の規約 |
-| `/satomi-skills:skill-builder` | `@satomi-skills:skill-builder` | このリポジトリへのスキルとエージェントの追加手順 |
-| `/satomi-skills:skill-refactor` | `@satomi-skills:skill-refactor` | 長くなったスキルの計測と `references/` への分割 |
-
 ## 導入
 
 ### Claude Code に入れる
@@ -46,34 +35,6 @@ claude plugin details satomi-skills
 | `user`（既定） | 全プロジェクト | `~/.claude/settings.json` |
 | `project` | このプロジェクトのみ。リポジトリで共有できる | `.claude/settings.json` |
 | `local` | このプロジェクトのみ。自分だけ | `.claude/settings.local.json` |
-
-### クローン方式の注意
-
-`owner/repo` の短縮形は **既定で SSH でクローンする。** 公開リポジトリでも SSH 接続には鍵が必要になるため、鍵が `ssh-agent` に載っていて `github.com` が `known_hosts` にある状態が前提である。Claude Code は SSH の対話プロンプトを抑止するので、鍵のパスフレーズ入力待ちになると失敗する。
-
-SSH を使っていない場合は、環境変数で HTTPS に切り替える。
-
-```
-CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1
-```
-
-URL を直接渡しても同じ結果になる。
-
-```
-claude plugin marketplace add https://github.com/satomi-1224/satomi-skills.git
-```
-
-### ローカルのクローンから試す
-
-手を入れながら使う場合は、クローンしたディレクトリを直接マーケットプレイスとして登録する。編集は数秒で反映され、再起動は要らない。
-
-```
-git clone https://github.com/satomi-1224/satomi-skills
-claude plugin marketplace add ./satomi-skills --scope local
-claude plugin install satomi-skills@satomi-skills --scope local
-```
-
-`--scope local` にしておくと、そのプロジェクトの `.claude/settings.local.json` にだけ書かれるので他に影響しない。外すときは `claude plugin marketplace remove satomi-skills --scope local`。
 
 ### 個別のスキルだけ取り込む
 
