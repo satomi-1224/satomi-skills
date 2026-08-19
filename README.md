@@ -22,7 +22,7 @@ claude plugin marketplace add satomi-1224/satomi-skills
 claude plugin install satomi-skills@satomi-skills
 ```
 
-入ったことを確認する。`Skills` と `Agents` がどちらも 6 と出れば成功である。
+入ったことを確認する。`Skills` と `Agents` がどちらも 7 と出れば成功である。
 
 ```
 claude plugin details satomi-skills
