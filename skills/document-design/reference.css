@@ -1,0 +1,346 @@
+/* ============================================================
+   ドキュメントデザイン規約 — 基本スタイル一式（satomi-skills:document-design）
+   <style> に丸ごと貼ってから差分を足す。規則の理由は SKILL.md を参照。
+   @media print は必ずスタイルシートの最後に置く（後勝ちで暗テーマに勝つ設計）。
+   ============================================================ */
+
+/* ---- カラートークン: Warm Graphite（明 = 既定） ---- */
+:root {
+  --bg:      #F4F3F1;  /* ページ地 */
+  --surface: #FFFFFF;  /* カード・グループ */
+  --raised:  #FAF9F7;  /* surface 上のさらに一段 */
+  --sep:     #E8E6E2;  /* 罫線 */
+  --label:   #1F1E1C;  /* 本文 */
+  --sec:     #5F5D58;  /* 2 次テキスト */
+  --ter:     #726F66;  /* 3 次テキスト */
+  --accent:    #33302B;  /* 操作可能な要素 */
+  --accent-fg: #FFFFFF;
+  --success: #1E6B45;
+  --warning: #7E5100;
+  --danger:  #9E2822;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 0 0 .5px rgba(0,0,0,.04);
+  color-scheme: light;
+}
+
+/* 暗テーマ。media query と data-theme の両方に同じ値を定義する
+   （トグルが media query に勝つため。トークンだけ再定義し、
+   コンポーネントのスタイルをこの内側に書かない） */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #000000;
+    --surface: #1E1D1B;
+    --raised:  #2E2C29;
+    --sep:     #3B3934;
+    --label:   #F7F6F4;
+    --sec:     #ADA9A0;
+    --ter:     #9C988F;
+    --accent:    #E8E4DC;
+    --accent-fg: #1E1D1B;
+    --success: #6FD3A3;
+    --warning: #EDBB5C;
+    --danger:  #FF8078;
+    --shadow: none;  /* 暗テーマは影でなく面の明度差で階層を表す */
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:      #000000;
+  --surface: #1E1D1B;
+  --raised:  #2E2C29;
+  --sep:     #3B3934;
+  --label:   #F7F6F4;
+  --sec:     #ADA9A0;
+  --ter:     #9C988F;
+  --accent:    #E8E4DC;
+  --accent-fg: #1E1D1B;
+  --success: #6FD3A3;
+  --warning: #EDBB5C;
+  --danger:  #FF8078;
+  --shadow: none;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg:      #F4F3F1;
+  --surface: #FFFFFF;
+  --raised:  #FAF9F7;
+  --sep:     #E8E6E2;
+  --label:   #1F1E1C;
+  --sec:     #5F5D58;
+  --ter:     #726F66;
+  --accent:    #33302B;
+  --accent-fg: #FFFFFF;
+  --success: #1E6B45;
+  --warning: #7E5100;
+  --danger:  #9E2822;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 0 0 .5px rgba(0,0,0,.04);
+  color-scheme: light;
+}
+
+/* ---- 基本 ---- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--label);
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+               "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 16px;
+  font-feature-settings: "palt" 1;  /* 日本語の詰め組み */
+  line-height: 1.65;
+  letter-spacing: .005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre, samp, kbd {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+h1, h2, h3 { font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+h1 { font-size: 24px; margin: 0 0 8px; }
+h2 { font-size: 19px; margin: 2.2em 0 .6em; }
+h3 { font-size: 16px; margin: 1.8em 0 .5em; }
+p  { margin: .8em 0; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--ter);
+  text-underline-offset: 3px;
+}
+@media (hover: hover) {
+  a:hover { text-decoration-color: var(--label); }
+}
+
+:focus-visible { outline: 2.5px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+
+/* ---- レイアウト ---- */
+.wrap {
+  position: relative;
+  max-width: 760px;              /* 本文が全角 40〜45 文字に収まる幅 */
+  margin-inline: auto;
+  padding: 48px 24px 64px;
+}
+
+.doc-meta {
+  position: absolute; top: 20px; right: 24px;
+  font-size: 12px; color: var(--ter);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 480px) {
+  .doc-meta { position: static; text-align: right; margin-bottom: 8px; }
+}
+
+.group {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+.group > .row { padding: 12px 16px; }
+.group > .row + .row { box-shadow: inset 0 .5px 0 var(--sep); }  /* 0.5px 罫線 */
+
+.chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 12px; font-weight: 500;
+  background: var(--raised); color: var(--sec);
+}
+.status-success { color: var(--success); font-weight: 500; }
+.status-warning { color: var(--warning); font-weight: 500; }
+.status-danger  { color: var(--danger);  font-weight: 500; }
+
+/* ---- 表 ---- */
+.tscroll {
+  overflow-x: auto;              /* body を横スクロールさせない */
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+th, td { padding: 10px 14px; text-align: left; vertical-align: top; }
+thead th { font-size: 12.5px; font-weight: 500; color: var(--sec); }
+tbody td { box-shadow: inset 0 .5px 0 var(--sep); }
+
+/* ---- コード ---- */
+pre {
+  background: var(--raised);
+  border-radius: 9px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ---- アコーディオン（印刷想定の資料では open を既定で付ける） ---- */
+details {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+summary { cursor: pointer; padding: 12px 16px; font-weight: 500; }
+.details-body { padding: 0 16px 14px; }
+
+/* ---- タブ（radio ハック。JS を使わない） ---- */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+.tab-input {                     /* 非表示だがフォーカス可能。矢印キーで切替 */
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.tab-label {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 14px; font-weight: 500;
+  color: var(--sec);
+  cursor: pointer;
+}
+.tab-input:checked + .tab-label { background: var(--accent); color: var(--accent-fg); }
+.tab-input:focus-visible + .tab-label { outline: 2.5px solid var(--accent); outline-offset: 2px; }
+.tab-panels { order: 2; width: 100%; margin-top: 12px; }
+.tab-panel { display: none; }
+.tab-input:nth-of-type(1):checked ~ .tab-panels > .tab-panel:nth-child(1),
+.tab-input:nth-of-type(2):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tab-input:nth-of-type(3):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tab-input:nth-of-type(4):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tab-input:nth-of-type(5):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tab-input:nth-of-type(6):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+/* ---- React Aria 互換コンポーネント
+   静的出力ではデータ属性は付かないため、擬似クラスと併記する。
+   :hover は @media (hover: hover) で包み、タッチの張り付きを防ぐ ---- */
+.react-aria-Button {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font: inherit; font-weight: 500;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+@media (hover: hover) {
+  .react-aria-Button:hover { opacity: .88; }
+}
+.react-aria-Button[data-hovered] { opacity: .88; }
+.react-aria-Button:active,
+.react-aria-Button[data-pressed] { opacity: .7; }
+.react-aria-Button:disabled,
+.react-aria-Button[data-disabled] { opacity: .35; cursor: default; }
+
+/* 静的マークアップ:
+   <label class="react-aria-Switch"><input type="checkbox"><span class="indicator"></span>ラベル</label> */
+.react-aria-Switch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.react-aria-Switch input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.react-aria-Switch .indicator {
+  width: 44px; height: 26px;
+  border-radius: 13px;
+  background: var(--sep);
+  transition: background .18s cubic-bezier(.32,.72,0,1);
+}
+.react-aria-Switch .indicator::before {
+  content: "";
+  display: block;
+  width: 22px; height: 22px;
+  margin: 2px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  transition: transform .18s cubic-bezier(.32,.72,0,1);
+}
+.react-aria-Switch input:checked + .indicator,
+.react-aria-Switch[data-selected] .indicator { background: var(--accent); }
+.react-aria-Switch input:checked + .indicator::before,
+.react-aria-Switch[data-selected] .indicator::before { transform: translateX(18px); }
+.react-aria-Switch input:focus-visible + .indicator {
+  outline: 2.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   印刷 CSS — 必ずスタイルシートの最後に置く。省略しない
+   ============================================================ */
+@media print {
+  /* 1. 明テーマに固定する。:root 単独では :root[data-theme="dark"] に
+        詳細度で負けるため、両方のセレクタで上書きする */
+  :root, :root[data-theme="dark"] {
+    --bg: #FFFFFF;      /* 地の色を敷かない */
+    --surface: #FFFFFF;
+    --raised: #FFFFFF;
+    --sep: #C8C5BF;     /* 罫線は画面用より濃くしないと出ない */
+    --label: #000000;
+    --sec: #3A3A3A;
+    --ter: #5A5A5A;
+    --shadow: none;     /* 影は印刷されないか汚れになる */
+    color-scheme: light;
+  }
+
+  @page { margin: 16mm 14mm; }
+
+  body { background: #FFFFFF; font-size: 10.5pt; line-height: 1.6; }
+  .wrap { max-width: none; padding: 0; }
+
+  /* 2. 影で領域を示していた箇所は罫線に置き換える */
+  .group, .tscroll, pre, details { border: .5px solid var(--sep); box-shadow: none; }
+
+  /* 3. 分断を防ぐ */
+  h1, h2, h3 { break-after: avoid; }
+  table, pre, figure, .group { break-inside: avoid; }
+  tr, li { break-inside: avoid; }
+  thead { display: table-header-group; }  /* 複数ページに跨る表で見出しを繰り返す */
+
+  /* 4. 画面用の横スクロールを解除する。紙ではスクロールできない */
+  .tscroll, [style*="overflow-x"] { overflow: visible !important; }
+  table { min-width: 0 !important; width: 100% !important; font-size: 9.5pt; }
+
+  /* 5. リンクは URL を併記する。紙ではクリックできない */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt; color: var(--sec); word-break: break-all;
+  }
+
+  /* 6. 操作専用の要素は落とす */
+  button, .react-aria-Button, .react-aria-Switch { display: none; }
+
+  /* 7. アコーディオンを開く。効くのは ::details-content 対応ブラウザのみ
+        （Chrome 131+ / Firefox 143+ / Safari 18.4+）。
+        それ以前のブラウザ対策として open を既定で付けておく */
+  details:not([open])::details-content { content-visibility: visible; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* 8. タブは全パネルを展開し、data-title を見出しにする */
+  .tab-label { display: none; }
+  .tab-panel { display: block !important; }
+  .tab-panel::before {
+    content: attr(data-title);
+    display: block;
+    font-weight: 600;
+    margin: 10px 0 4px;
+  }
+
+  /* 9. 背景色に意味がある要素は色を維持する */
+  .chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
