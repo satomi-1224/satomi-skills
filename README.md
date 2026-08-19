@@ -47,22 +47,20 @@ claude plugin details satomi-skills
 | `project` | このプロジェクトのみ。リポジトリで共有できる | `.claude/settings.json` |
 | `local` | このプロジェクトのみ。自分だけ | `.claude/settings.local.json` |
 
-### private リポジトリの認証
+### クローン方式の注意
 
-このリポジトリは private である。導入するアカウントに読み取り権限が必要になる。
+`owner/repo` の短縮形は **既定で SSH でクローンする。** 公開リポジトリでも SSH 接続には鍵が必要になるため、鍵が `ssh-agent` に載っていて `github.com` が `known_hosts` にある状態が前提である。Claude Code は SSH の対話プロンプトを抑止するので、鍵のパスフレーズ入力待ちになると失敗する。
 
-`owner/repo` の短縮形は **既定で SSH でクローンする。** SSH 鍵が `ssh-agent` に載っていて、`github.com` が `known_hosts` にある状態が前提である。Claude Code は SSH の対話プロンプトを抑止するため、鍵のパスフレーズ入力待ちになると失敗する。
-
-HTTPS でクローンさせたい場合は環境変数で切り替える。git の credential helper（`gh auth setup-git` や osxkeychain）が使われる。
+SSH を使っていない場合は、環境変数で HTTPS に切り替える。
 
 ```
 CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1
 ```
 
-private リポジトリでは背景での自動更新が不安定になる。背景更新は credential helper を無効化して `git pull` するため、HTTPS では認証できずクローンのやり直しにフォールバックする。SSH リモートなら影響しない。HTTPS で運用するなら次を設定して、失敗時に既存のクローンを保持させる。
+URL を直接渡しても同じ結果になる。
 
 ```
-CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE=1
+claude plugin marketplace add https://github.com/satomi-1224/satomi-skills.git
 ```
 
 ### ローカルのクローンから試す
