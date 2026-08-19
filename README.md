@@ -205,6 +205,12 @@ claude plugin details satomi-skills
 
 `claude plugin details` の `Skills` と `Agents` の数が `skills/` と `agents/` の実数に一致すること。マニフェスト検証だけでは配置の誤りを検出できない。
 
+## ライセンス
+
+MIT。全文は [LICENSE](LICENSE) にある。
+
+各 `SKILL.md` の frontmatter にも `license: MIT` を入れている。スキルをディレクトリ単位でコピーしたときに `LICENSE` が付いてこないため、スキル自身にライセンスを持たせている。
+
 ## 参考文献
 
 - [Agent Skills 仕様](https://agentskills.io/specification)
