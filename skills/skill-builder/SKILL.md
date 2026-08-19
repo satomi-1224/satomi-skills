@@ -1,6 +1,7 @@
 ---
 name: skill-builder
 description: このリポジトリにスキルを追加する、既存のスキルを修正する、対応するエージェントを用意する、スキルの書式や配置を確認するときに使う。satomi-skills の配置規約、Agent Skills 標準に収める frontmatter の書き方、1 スキル 1 エージェントの対応付け、トークン予算に収める分割方針、検証と反映の手順を定める。
+license: MIT
 allowed-tools: Bash(claude plugin validate *) Bash(claude plugin details *) Bash(git status *) Bash(git diff *)
 metadata:
   paired-agent: satomi-skills:skill-builder
@@ -71,6 +72,7 @@ grep -rA3 "^skills:" agents/
 ---
 name: <ディレクトリ名と同じ>
 description: 何をするか + いつ使うか。自動起動の判断キーになるため具体的に書く
+license: MIT
 metadata:
   paired-agent: satomi-skills:<ディレクトリ名と同じ>
 ---

@@ -12,6 +12,7 @@
       "name": "satomi-skills",
       "source": "./",
       "description": "satomi. の作業規約をスキルとして束ねたプラグイン。1 スキルに 1 エージェントを対応させ、作業基準・コミット・worktree・ドキュメントデザイン・スキル作成をカバーする。",
+      "license": "MIT",
       "category": "productivity",
       "tags": [
         "git",

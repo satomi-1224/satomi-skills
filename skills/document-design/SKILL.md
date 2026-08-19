@@ -1,6 +1,7 @@
 ---
 name: document-design
 description: ドキュメントや成果物ページを作るときに使う。文章の書き方（だ・である調、強調の抑制、比較表、作成日時、参考文献）、タブ・アコーディオン・表による動的表現、カラートークン・書体・レイアウト・React Aria 互換の命名・印刷 CSS の実装規約を定める。Artifact / 単体 HTML / Markdown いずれの出力先でも、文体や配色を自分で選ばずここの規則と同梱の reference.css に従う。
+license: MIT
 metadata:
   paired-agent: satomi-skills:document-design
 ---

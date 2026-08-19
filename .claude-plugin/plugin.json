@@ -10,6 +10,7 @@
   },
   "homepage": "https://github.com/satomi-1224/satomi-skills",
   "repository": "https://github.com/satomi-1224/satomi-skills",
+  "license": "MIT",
   "keywords": [
     "git",
     "commit",

@@ -1,6 +1,7 @@
 ---
 name: commit
 description: コミットを作成する、コミットメッセージを起案する、コミットの粒度や分割を判断するときに使う。type は feat/fix/docs/style/refactor/perf/test/chore に限り、1 コミット = 1 type に収める分割規則と、認証情報を含めない禁止事項を定める。
+license: MIT
 allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git add *) Bash(git commit *)
 metadata:
   paired-agent: satomi-skills:commit

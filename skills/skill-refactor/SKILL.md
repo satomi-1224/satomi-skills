@@ -1,6 +1,7 @@
 ---
 name: skill-refactor
 description: 既存のスキルが長くなりすぎたときに使う。on-invoke トークンが予算を超えたスキルを計測し、毎回必要な内容と必要になったときだけ読む内容に振り分けて references/ へ分割し、索引を張って検証する手順を定める。スキルを分割する、スキルを軽くする、progressive disclosure を効かせる、トークンコストを下げるときに参照する。
+license: MIT
 allowed-tools: Bash(claude plugin details *) Bash(claude plugin validate *) Bash(awk *) Bash(wc *) Bash(grep *)
 metadata:
   paired-agent: satomi-skills:skill-refactor
