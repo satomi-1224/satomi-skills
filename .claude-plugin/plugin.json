@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "satomi-skills",
+  "displayName": "satomi skills",
+  "version": "0.1.0",
+  "description": "satomi. の作業規約をスキルとして束ねたプラグイン。1 スキルに 1 エージェントを対応させ、作業基準・コミット・worktree・ドキュメントデザイン・スキル作成をカバーする。",
+  "author": {
+    "name": "satomi.",
+    "url": "https://github.com/satomi-1224"
+  },
+  "homepage": "https://github.com/satomi-1224/satomi-skills",
+  "repository": "https://github.com/satomi-1224/satomi-skills",
+  "keywords": [
+    "git",
+    "commit",
+    "worktree",
+    "documentation",
+    "skill-authoring"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "satomi-skills",
+  "description": "satomi. の Claude Code プラグインを配布するマーケットプレイス",
+  "version": "0.1.0",
+  "owner": {
+    "name": "satomi.",
+    "url": "https://github.com/satomi-1224"
+  },
+  "plugins": [
+    {
+      "name": "satomi-skills",
+      "source": "./",
+      "description": "satomi. の作業規約をスキルとして束ねたプラグイン。1 スキルに 1 エージェントを対応させ、作業基準・コミット・worktree・ドキュメントデザイン・スキル作成をカバーする。",
+      "category": "productivity",
+      "tags": [
+        "git",
+        "commit",
+        "worktree",
+        "documentation",
+        "skill-authoring"
+      ]
+    }
+  ]
+}
