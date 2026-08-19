@@ -136,35 +136,7 @@ satomi-skills/
 grep -r "paired-agent" skills/
 grep -rA2 "^skills:" agents/
 ```
-
-## 個人設定
-
-作業の基準は `core` スキルが持つため、`CLAUDE.md` は不要である。
-
-環境側の設定はプラグインでは配布できない（プラグインの `settings.json` は `agent` と `subagentStatusLine` しか受け付けない）。`~/.claude/settings.json` に直接置く。以下は作者の設定値である。
-
-```json
-{
-  "language": "japanese",
-  "alwaysThinkingEnabled": false,
-  "effortLevel": "xhigh",
-  "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
-  "permissions": {
-    "defaultMode": "auto"
-  }
-}
-```
-
-## 検証
-
-```
-claude plugin validate .claude-plugin/plugin.json --strict
-claude plugin validate .claude-plugin/marketplace.json --strict
-claude plugin details satomi-skills
-```
-
-`claude plugin details` の `Skills` と `Agents` の数が `skills/` と `agents/` の実数に一致すること。マニフェスト検証だけでは配置の誤りを検出できない。
+`Skills` と `Agents` の数が `skills/` と `agents/` の実数に一致すること。マニフェスト検証だけでは配置の誤りを検出できない。
 
 ## ライセンス
 
