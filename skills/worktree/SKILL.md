@@ -1,6 +1,6 @@
 ---
 name: worktree
-description: 作業タスクに着手する、ブランチを切って対応する、元の clone を汚さず作業するときに使う。worktree を ghq root 直下の .worktrees/<host>/<user>/<repo>/<branch> に集約する配置規則と、作業後も worktree を削除しない後始末の方針を定める。
+description: worktree を ghq root 直下の .worktrees/<host>/<user>/<repo>/<branch> に集約する配置規則と、作業後も worktree を削除しない後始末の方針を定める。
 license: MIT
 allowed-tools: Bash(ghq root) Bash(git worktree *) Bash(git branch *) Bash(git config *) Bash(git rev-parse *)
 metadata:
